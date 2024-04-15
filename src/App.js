@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Search from "./components/Search";
+import List from "./components/List";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  // 初始化状态
+  state = {
+    users: [],
+    isFirst: true, // whether it is the first time to open the page
+    isLoading: false, // whether it is loading
+    err: "", // error message
+  };
+
+  updateAppState = (stateObj) => {
+    this.setState(stateObj);
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <Search updateAppState={this.updateAppState} />
+        <List {...this.state} />
+      </div>
+    );
+  }
 }
-
-export default App;
