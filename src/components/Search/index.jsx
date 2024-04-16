@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import PubSub from "pubsub-js";
 
 export default class Search extends Component {
 
     search = () => {
-        // get the input content
         const {keyWordElement:{value:keyWord}} = this;
-        console.log(keyWord);
-        // inform App to update the state before sending the request
-        this.props.updateAppState({isFirst: false, isLoading: true});
+        // inform List to update the state before sending the request
+        PubSub.publish("search", {isFirst: false, isLoading: true});
         // send the request
-        axios.get(`http://localhost:3000/api1/search/users?q=${keyWord}`).then(
+        axios.get(`/api1/search/users?q=${keyWord}`).then(
             response => {
-                // inform App to update the state after successfully receiving the response
-                this.props.updateAppState({isLoading: false, users: response.data.items});
+                // inform List to update the state after successfully receiving the response
+                PubSub.publish("search", {isLoading: false, users: response.data.items});
             },
             error => {
-                // inform App to update the state after failing to receive the response
-                this.props.updateAppState({isLoading: false, err: error.message});
+                // inform List to update the state after failing to receive the response
+                PubSub.publish("search", {isLoading: false, err: error.message});
             }
         )
 
     }
+
     render() {
         return (
             <section className="jumbotron">
