@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import About from "./pages/About";    // About is router component
 import Home from "./pages/Home";     // Home is router component
 import Header from "./components/Header"; // Header is common component
@@ -23,7 +23,7 @@ export default class App extends Component {
 
               {/* react中靠路由链接实现切换组件 */}
               <MyNavLink to="/about">About</MyNavLink>
-                <MyNavLink to="/home">Home</MyNavLink>
+              <MyNavLink to="/home">Home</MyNavLink>
             </div>
           </div>
           <div className="col-xs-6">
@@ -31,8 +31,11 @@ export default class App extends Component {
               <div className="panel-body">
                 {/* 注册路由 */}
                 <Switch>
+                    {/* exact: 开启严格匹配 */}
                     <Route path="/about" component={About} />
                     <Route path="/home" component={Home} />
+                    {/* Redirect: 当所有路由都无法匹配时，跳转到localhost:3000/about */}
+                    <Redirect to="/about"/>
                 </Switch>
               </div>
             </div>
