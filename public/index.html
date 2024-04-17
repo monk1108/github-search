@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <!-- 处理样式丢失问题 -->
+    <!-- href路径/css前不能加.，表示从localhost:3000（即public/）开始找，加了.变成从当前路径开始找 -->
+    <!-- 或者写%PUBLIC_URL%/，表示从public/开始 -->
+    <!-- 或者在根目录index.js里把BrowserRouter改成 HashRouter-->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.css" />
     <title>React App</title>
     <style>
         .highlight {
