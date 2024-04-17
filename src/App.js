@@ -1,25 +1,43 @@
 import React, { Component } from "react";
-import Search from "./components/Search";
-import List from "./components/List";
+import { Route, Switch } from "react-router-dom";
+import About from "./pages/About";    // About is router component
+import Home from "./pages/Home";     // Home is router component
+import Header from "./components/Header"; // Header is common component
+import MyNavLink from "./components/MyNavLink";
 
 export default class App extends Component {
-  // 初始化状态
-  state = {
-    users: [],
-    isFirst: true, // whether it is the first time to open the page
-    isLoading: false, // whether it is loading
-    err: "", // error message
-  };
-
-  updateAppState = (stateObj) => {
-    this.setState(stateObj);
-  }
-
   render() {
     return (
-      <div className="container">
-        <Search updateAppState={this.updateAppState} />
-        <List {...this.state} />
+      <div>
+        <div className="row">
+          <div className="col-xs-offset-2 col-xs-8">
+            <Header/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-2 col-xs-offset-2">
+            <div className="list-group">
+              {/* 原生的写法 */}
+              {/* <a className="list-group-item" href="./about.html">About</a>
+              <a className="list-group-item active" href="./home.html">Home</a> */}
+
+              {/* react中靠路由链接实现切换组件 */}
+              <MyNavLink to="/about">About</MyNavLink>
+                <MyNavLink to="/home">Home</MyNavLink>
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="panel">
+              <div className="panel-body">
+                {/* 注册路由 */}
+                <Switch>
+                    <Route path="/about" component={About} />
+                    <Route path="/home" component={Home} />
+                </Switch>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
