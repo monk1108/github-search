@@ -22,6 +22,7 @@ export default class Home extends Component {
           <Switch>
             <Route path="/home/news" component={News} />
             <Route path="/home/message" component={Message} />
+            {/* 点home时，无法匹配上面两个，redirect到/home/news */}
             <Redirect to="/home/news" />
           </Switch>
         </div>
