@@ -1,1 +1,1 @@
-A small react demo for retrieving github users. Just my first trying.
+React learning demos.
