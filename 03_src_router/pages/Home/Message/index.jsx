@@ -60,7 +60,7 @@ export default class Message extends Component {
         {/* 声明接受参数方式3：state参数 */}
         <Route path="/home/message/detail" component={Detail} />
 
-          <button onClick={this.back}>BACK</button>&nbsp;
+          <button onClick={this.back}>BACK</button>&nbsp;&nbsp;
           <button onClick={this.forward}>FORWARD</button>
 
       </div>
